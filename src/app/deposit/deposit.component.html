@@ -1,0 +1,24 @@
+<header>
+  <a href="/main" class="logo">
+   <h1>CryptoWallet</h1>
+  </a>
+  <nav>
+    <a href="/dashboard">Dashboard</a>
+    <button class="logoutButton" (click)="logout()">Log Out</button>
+  </nav>
+</header>
+
+<section>
+  <h1>Deposit</h1>
+  <div class="qrcode">
+    <img src="../../assets/qrcode.png" alt="QR Code" class="qrcodephoto">
+    <div class="address">
+      <p #textToCopy>Not Found</p>
+      <button (click)="copyText(textToCopy)">Copy</button>
+    </div>
+    <div class="btcinfo">
+      <h2>&#9679; BTC transfers are credited after 6 confirmations. Processing can take up to 1 business day.</h2>
+      <h2>&#9679; You can deposit unlimited BTC. Withdrawals may be restricted by your daily limit.</h2>
+    </div>
+  </div>
+</section>

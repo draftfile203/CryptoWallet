@@ -1,0 +1,123 @@
+section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    height: 100vh;
+}
+
+.logo {
+  text-decoration: none;
+}
+
+.logo h1 {
+  color: pink;
+  font-size: 28px;
+  animation: slideFromTop 0.8s ease-out forwards;
+  animation-delay: 0.2s;
+  opacity: 0;
+}
+
+.login-container {
+  background: #1c1c1e;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(255, 192, 203, 0.15);
+  width: 320px;
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+    animation: slideFromBottom 0.8s ease-out forwards;
+  animation-delay: 0.4s;
+  opacity: 0;
+}
+
+.login-form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #ffc0cb;
+  font-weight: 600;
+  font-size: 22px;
+}
+
+.login-form label {
+  font-size: 14px;
+  color: #ddd;
+  margin-top: 10px;
+  display: block;
+}
+
+.login-form input[type="email"],
+.login-form input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  margin-top: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #333;
+  border-radius: 6px;
+  background-color: #2c2c2e;
+  color: #fff;
+  transition: border 0.3s ease, background 0.3s ease;
+}
+
+.login-form input[type="email"]:focus,
+.login-form input[type="password"]:focus {
+  background-color: #3a3a3c;
+  border-color: #ffc0cb;
+}
+
+.remember-me {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+  font-size: 13px;
+  color: #ccc;
+}
+
+.remember-me input[type="checkbox"] {
+  accent-color: #ffc0cb;
+  cursor: pointer;
+}
+
+.sign-in-btn {
+  width: 100%;
+  padding: 12px;
+  background-color: #ffc0cb;
+  color: #1c1c1e;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.sign-in-btn:hover {
+  background-color: #f79ab3;
+}
+
+  
+/* Slide from top */
+@keyframes slideFromTop {
+  0% {
+    transform: translateY(-100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+/* Slide from bottom */
+@keyframes slideFromBottom {
+  0% {
+    transform: translateY(100px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

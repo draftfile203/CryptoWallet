@@ -1,0 +1,120 @@
+.admin-container {
+  display: flex;
+  height: 90vh;
+  max-width: 1000px;
+  margin: auto;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: #f9f9f9;
+}
+
+.user-list {
+  width: 30%;
+  border-right: 1px solid #ddd;
+  padding: 20px;
+  background-color: #f0f0f0;
+  overflow-y: auto;
+}
+
+.user-list h3 {
+  margin-bottom: 10px;
+}
+
+.user-list ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.user-list li {
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: background-color 0.3s;
+}
+
+.user-list li:hover {
+  background-color: #e0e0e0;
+}
+
+.user-list li.active {
+  background-color: #d1e7dd;
+  font-weight: bold;
+  color: #155724;
+}
+
+.unread-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  background-color: red;
+  border-radius: 50%;
+  margin-left: 8px;
+}
+
+
+.chat-box {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+}
+
+.chat-box h3 {
+  margin-bottom: 10px;
+  color: #444;
+}
+
+.message-list {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.user {
+  align-self: flex-end;
+  background-color: #007bff;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 14px;
+  max-width: 60%;
+  word-break: break-word;
+  text-align: left;
+}
+
+.admin {
+  align-self: flex-start;
+  background-color: #28a745;
+  color: white;
+  padding: 10px 14px;
+  border-radius: 14px;
+  max-width: 60%;
+  word-break: break-word;
+  text-align: left;
+}
+
+input {
+  padding: 12px;
+  margin-bottom: 10px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+button {
+  padding: 12px;
+  background-color: #444;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #666;
+}

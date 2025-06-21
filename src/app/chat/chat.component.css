@@ -1,0 +1,279 @@
+/* Base Theme */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  color: #fff;
+}
+
+/* Header */
+header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  min-height: 10vh;
+  align-items: center;
+background-color: rgba(20, 17, 17, 0.7);
+  padding: 0 20px;
+}
+
+.logo {
+    text-decoration: none;
+}
+
+
+
+.logout-button {
+  background-color: #ff5fa2;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s ease;
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: #e94d90;
+}
+
+.logo h1 {
+  color: pink;
+  font-size: 28px;
+  margin: 0;
+  font-weight: 100;
+}
+
+/* Login Area */
+.login {
+  display: flex;
+  gap: 20px;
+  margin-right: 20px;
+}
+
+
+.loginA {
+  padding: 4px;
+   text-decoration: none;
+  font-size: 20px;
+  color: pink;
+}
+
+.loginA:hover {
+  color: #fff;
+  transition: 0.3s;
+}
+
+.register {
+    background: linear-gradient(90deg, #70213d 0%, #94718a 100%);
+  padding: 4px 10px;
+  border-radius: 4px;
+color: white !important;
+  text-decoration: none;
+  font-size: 20px;
+}
+
+.register:hover {
+  background: linear-gradient(90deg, #94718a 0%,  #70213d 100%);
+  transition: 0.3s;
+}
+
+.dashboard {
+  padding: 10px;
+    text-decoration: none;
+  font-size: 20px;
+  color: pink;
+  
+  text-decoration: none;
+}
+
+.dashboard:hover {
+  color: #fff;
+  transition: 0.3s;
+}
+
+/* Section */
+section {
+  min-height: 90vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+/* Chat Container */
+.chat {
+  display: flex;
+  flex-direction: column;
+  padding: 60px;
+  width: 100%;
+  max-width: 1000px;
+background-color: rgba(20, 17, 17, 0.9);
+  border-radius: 40px;
+    opacity: 0;
+  transform: scale(0.8);
+  animation: expandFromCenter 0.6s ease-out forwards;
+  animation-delay: 0.2s;
+  will-change: opacity, transform;
+}
+
+.chat h2 {
+  color: pink;
+  font-size: 32px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ff66c4;
+  padding-bottom: 10px;
+}
+
+/* Messages Area */
+.messages-container {
+  display: flex;
+  flex-direction: column;
+  max-height: 400px;
+  overflow-y: auto;
+  padding: 10px 0;
+  min-height: 40vh;
+}
+
+/* Scrollbar Styling */
+.messages-container::-webkit-scrollbar {
+  width: 4px;
+}
+.messages-container::-webkit-scrollbar-thumb {
+  background-color: #ff66c4;
+  border-radius: 4px;
+}
+
+/* Messages */
+.user {
+  align-self: flex-end;
+  background-color: #ff66c4;
+  color: #000;
+  border-radius: 12px;
+  padding: 8px 14px;
+  margin-top: 10px;
+  max-width: 50%;
+  font-size: 16px;
+  font-weight: 400;
+  word-break: break-word;
+  text-align: left;
+  margin-right: 10px;
+}
+
+.admin {
+  align-self: flex-start;
+  background-color: #333;
+  color: #fff;
+  border-radius: 12px;
+  padding: 8px 14px;
+  margin-top: 10px;
+  max-width: 50%;
+  font-size: 16px;
+  font-weight: 400;
+  word-break: break-word;
+  text-align: left;
+}
+
+/* Input & Send Button */
+input {
+  padding: 16px;
+  margin-top: 20px;
+  border-radius: 16px;
+  background-color: #222;
+  color: #fff;
+  border: 1px solid #ff66c4;
+  outline: none;
+  font-size: 16px;
+}
+
+.chat button {
+  cursor: pointer;
+  margin-top: 10px;
+  padding: 12px;
+  background-color: #ff66c4;
+  border-radius: 16px;
+  border: none;
+  color: #000;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
+
+.chat button:hover {
+  background-color: #ff4bb4;
+}
+
+@media (max-width: 500px) {
+  header {
+   
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .logo h1 {
+    font-size: 22px;
+  }
+
+  .login {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-right: 0;
+  }
+
+  .loginA,
+  .register,
+  .dashboard,
+  .logout-button {
+    font-size: 16px;
+    padding: 6px 10px;
+  }
+
+  section {
+    padding: 20px 10px;
+  }
+
+  .chat {
+    padding: 20px;
+    border-radius: 20px;
+  }
+
+  .chat h2 {
+    font-size: 24px;
+  }
+
+  .messages-container {
+    min-height: 200px;
+    max-height: 300px;
+  }
+
+  input {
+    font-size: 14px;
+    padding: 12px;
+  }
+
+  .chat button {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .user,
+  .admin {
+    max-width: 80%;
+    font-size: 14px;
+  }
+}
+
+
+
+@keyframes expandFromCenter {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}

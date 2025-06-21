@@ -1,0 +1,27 @@
+<div class="admin-container">
+  <div class="user-list">
+    <h3>Users</h3>
+    <ul *ngIf="users.length > 0">
+      <li *ngFor="let user of users; trackBy: trackByUser"
+          (click)="selectUser(user)"
+          [class.active]="user === selectedUserId">
+        {{ user }}
+        <span *ngIf="unreadCounts[user] > 0" class="unread-dot"> • </span>
+        (Unread: {{ unreadCounts[user] }})
+      </li>
+    </ul>
+  </div>
+
+  <div class="chat-box" *ngIf="selectedUserId">
+    <h3>Chat with {{ selectedUserId }}</h3>
+
+    <div class="message-list" #messageList>
+      <div *ngFor="let msg of messages$ | async" [ngClass]="msg.sender">
+        {{ msg.text }}
+      </div>
+    </div>
+
+    <input [(ngModel)]="message" placeholder="Type a message..." (keydown.enter)="send()" />
+    <button (click)="send()">Send</button>
+  </div>
+</div>

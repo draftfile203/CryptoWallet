@@ -1,0 +1,47 @@
+<header>
+    <a href="/main" class="logo">
+        <h1>CryptoWallet</h1>
+    </a>
+
+ <div class="login">
+  <!-- Show login/register if NOT logged in -->
+  <ng-container *ngIf="!isLoggedIn; else loggedIn">
+    <a routerLink="/login" class="loginA">Log In</a>
+    <a routerLink="/register" class="register">Sign Up</a>
+  </ng-container>
+
+  <!-- Show logout button if logged in -->
+  <ng-template #loggedIn>
+     <a routerLink="/dashboard" class="dashboard">Dashboard</a>
+    <button (click)="logout()" class="logout-button">Log Out</button>
+  </ng-template>
+</div>
+</header>
+
+<section>
+  <div  class="chat">
+    <h2>Chat</h2>
+
+    <!-- Scrollable message container -->
+    <div class="messages-container" #messagesContainer>
+      <div *ngFor="let msg of messages$ | async" [ngClass]="msg.sender">
+    
+         {{ msg.text }}
+      </div>
+
+   
+    </div>
+
+    <input 
+  [(ngModel)]="message" 
+  placeholder="Type a message..." 
+  (keydown.enter)="send()" />
+
+<button (click)="send()">Send</button>
+
+  </div>
+</section>
+
+
+
+
