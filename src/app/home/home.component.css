@@ -371,19 +371,19 @@ section {
 
 .faq-animate-0.visible {
   animation: slideInLeft 0.7s ease forwards;
-  animation-delay: 0.3s;
+  animation-delay: 0.1s;
 }
 .faq-animate-1.visible {
-  animation: slideInTop 0.7s ease forwards;
+  animation: slideInRight 0.7s ease forwards;
   animation-delay: 0.3s;
 }
 .faq-animate-2.visible {
-  animation: slideInBottom 0.7s ease forwards;
-  animation-delay: 0.3s;
+  animation: slideInLeft 0.7s ease forwards;
+  animation-delay: 0.6s;
 }
 .faq-animate-3.visible {
   animation: slideInRight 0.7s ease forwards;
-  animation-delay: 0.3s;
+  animation-delay: 0.9s;
 }
 
 @keyframes slideInLeft {
@@ -735,18 +735,7 @@ section {
     grid-template-columns: 1fr;
   }
 
-  .faq-animate-0.visible {
-  animation: slideFromLeft 0.7s ease forwards;
-}
-.faq-animate-1.visible {
-  animation: slideFromRight 0.7s ease forwards;
-}
-.faq-animate-2.visible {
-  animation: slideFromLeft 0.7s ease forwards;
-}
-.faq-animate-3.visible {
-  animation: slideFromRight 0.7s ease forwards;
-}
+
 
   #contact {
     flex-direction: column;
