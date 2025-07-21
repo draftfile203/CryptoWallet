@@ -9,22 +9,23 @@ import { Router, RouterModule} from '@angular/router';
 })
 export class DepositComponent {
 
-  copyText(element: HTMLElement): void {
-  const text = element.innerText || element.textContent || '';
-  navigator.clipboard.writeText(text).then(() => {
-    console.log('Text copied to clipboard');
-    // Optionally show a toast or temporary success message
-  }).catch(err => {
-    console.error('Failed to copy text: ', err);
-  });
-}
-
-
   constructor(private router: Router) {}
 
- logout(): void {
+  // Logs the user out by clearing localStorage and navigating to main page
+  logout(): void {
     localStorage.removeItem('loggedInUser');
     localStorage.removeItem('RegisteredUser');
     this.router.navigate(['/main']);
+  }
+
+  // Copies the inner text of the given HTML element to the clipboard
+  copyText(element: HTMLElement): void {
+    const text = element.innerText || element.textContent || '';
+    navigator.clipboard.writeText(text).then(() => {
+      console.log('Text copied to clipboard');
+      // Optionally display a visual confirmation here (e.g., toast message)
+    }).catch(err => {
+      console.error('Failed to copy text: ', err);
+    });
   }
 }

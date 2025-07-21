@@ -12,15 +12,13 @@ header {
   justify-content: space-between;
   min-height: 10vh;
   align-items: center;
-background-color: rgba(20, 17, 17, 0.7);
+  background-color: rgba(20, 17, 17, 0.7);
   padding: 0 20px;
 }
 
 .logo {
-    text-decoration: none;
+  text-decoration: none;
 }
-
-
 
 .logout-button {
   background-color: #ff5fa2;
@@ -52,10 +50,9 @@ background-color: rgba(20, 17, 17, 0.7);
   margin-right: 20px;
 }
 
-
 .loginA {
   padding: 4px;
-   text-decoration: none;
+  text-decoration: none;
   font-size: 20px;
   color: pink;
 }
@@ -66,10 +63,10 @@ background-color: rgba(20, 17, 17, 0.7);
 }
 
 .register {
-    background: linear-gradient(90deg, #70213d 0%, #94718a 100%);
+  background: linear-gradient(90deg, #70213d 0%, #94718a 100%);
   padding: 4px 10px;
   border-radius: 4px;
-color: white !important;
+  color: white !important;
   text-decoration: none;
   font-size: 20px;
 }
@@ -81,10 +78,9 @@ color: white !important;
 
 .dashboard {
   padding: 10px;
-    text-decoration: none;
+  text-decoration: none;
   font-size: 20px;
-  color: pink;
-  
+  color: pink; 
   text-decoration: none;
 }
 
@@ -109,9 +105,9 @@ section {
   padding: 60px;
   width: 100%;
   max-width: 1000px;
-background-color: rgba(20, 17, 17, 0.9);
+  background-color: rgba(20, 17, 17, 0.9);
   border-radius: 40px;
-    opacity: 0;
+  opacity: 0;
   transform: scale(0.8);
   animation: expandFromCenter 0.6s ease-out forwards;
   animation-delay: 0.2s;
@@ -141,6 +137,7 @@ background-color: rgba(20, 17, 17, 0.9);
 .messages-container::-webkit-scrollbar {
   width: 4px;
 }
+
 .messages-container::-webkit-scrollbar-thumb {
   background-color: #ff66c4;
   border-radius: 4px;
@@ -204,6 +201,19 @@ input {
   background-color: #ff4bb4;
 }
 
+/*KEYFRAME FOR ANIMATION*/
+@keyframes expandFromCenter {
+  0% {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/*RESPONSIVE CSS*/
 @media (max-width: 500px) {
   header {
    
@@ -262,18 +272,5 @@ input {
   .admin {
     max-width: 80%;
     font-size: 14px;
-  }
-}
-
-
-
-@keyframes expandFromCenter {
-  0% {
-    transform: scale(0.8);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1);
-    opacity: 1;
   }
 }

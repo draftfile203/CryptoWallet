@@ -1,19 +1,23 @@
 <section>
 <div class="admin-panel">
+  <!--SEARCH USERS BY EMAIL-->
   <input type="text" [(ngModel)]="searchEmail" placeholder="Enter Gmail" />
   <button (click)="searchUser()">Search</button>
 
+  <!--FOUND USER LIST-->
   <div *ngIf="userFound">
     <h3>User: {{ userFound.name }}</h3>
     <p>Email: {{ userFound.email }}</p>
     <p>Password: {{userFound.password}}</p>
 
+    <!--INPUTS FOR CHANGING CONTENT ON DASHBOARD-->
     <input type="text" [(ngModel)]="userFound.agentName" placeholder="agents full name" />
     <input type="text" [(ngModel)]="userFound.balance" placeholder="balance" />
     <input type="text" [(ngModel)]="userFound.btcbalance" placeholder="BTC" />
     <button (click)="updateUser()">Update</button>
   </div>
 
+  <!--DELETE USER FROM DATABASE-->
   <button (click)="deleteAllUsers()" class="delete-btn">
   Delete All Users
 </button>

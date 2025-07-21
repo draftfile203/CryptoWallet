@@ -22,51 +22,57 @@ import { RouterModule } from '@angular/router';
   imports: [FormsModule, NgFor, NgIf, NgClass, CommonModule, RouterModule]
 })
 export class AdminChatComponent implements OnInit, OnDestroy, AfterViewInit {
-  users: string[] = [];
-  selectedUserId: string | null = null;
-  messages$: Observable<any[]> = of([]);
-  message = '';
-  unreadCounts: { [userId: string]: number } = {};
-  allMessages: any[] = [];
-  private messageSub: Subscription | null = null;
-  private lastSeenTimestamps: { [userId: string]: Date } = {};
+  users: string[] = []; // List of unique users who sent messages
+  selectedUserId: string | null = null; // Currently selected user
+  messages$: Observable<any[]> = of([]); // Observable for messages to display
+  message = ''; // Message input by admin
+  unreadCounts: { [userId: string]: number } = {}; // Unread message count per user
+  allMessages: any[] = []; // All messages from the server
+  private messageSub: Subscription | null = null; // Subscription for message stream
+  private lastSeenTimestamps: { [userId: string]: Date } = {}; // Track last seen timestamps
 
-  @ViewChild('messageList') messageList!: ElementRef;
+  @ViewChild('messageList') messageList!: ElementRef; // Reference to the message list DOM element
 
   constructor(private chatService: ChatService, @Inject(PLATFORM_ID) private platformId: Object) {}
-ngOnInit(): void {
-  if (isPlatformBrowser(this.platformId)) {
-    this.loadLastSeenTimestamps();
 
-    this.messageSub = this.chatService.getAllMessages().subscribe(messages => {
-      this.allMessages = messages;
-      this.users = this.extractUniqueUsers(messages);
+  ngOnInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadLastSeenTimestamps();
 
-      if (!this.selectedUserId && this.users.length > 0) {
-        this.selectUser(this.users[0]);
-      }
+      // Subscribe to all messages from the server
+      this.messageSub = this.chatService.getAllMessages().subscribe(messages => {
+        this.allMessages = messages;
+        this.users = this.extractUniqueUsers(messages);
 
-      setTimeout(() => {
-        this.calculateUnreadCounts();
+        // Automatically select the first user if none selected
+        if (!this.selectedUserId && this.users.length > 0) {
+          this.selectUser(this.users[0]);
+        }
+
+        // Recalculate unread counts after messages load
+        setTimeout(() => {
+          this.calculateUnreadCounts();
+        });
       });
-    });
+    }
   }
-}
 
   ngAfterViewInit(): void {}
 
   ngOnDestroy() {
-    this.messageSub?.unsubscribe();
+    this.messageSub?.unsubscribe(); // Unsubscribe to avoid memory leaks
   }
 
+  // Select a user and load their messages
   selectUser(userId: string) {
     this.selectedUserId = userId;
     this.setLastSeen(userId, new Date());
     this.unreadCounts[userId] = 0;
     this.loadMessages(userId);
-    this.calculateUnreadCounts(); // recalculate after selection
+    this.calculateUnreadCounts();
   }
 
+  // Send message from admin to selected user
   send() {
     if (this.message.trim() && this.selectedUserId) {
       this.chatService.sendMessage(this.message, 'admin', this.selectedUserId);
@@ -75,6 +81,7 @@ ngOnInit(): void {
     }
   }
 
+  // Load messages for a specific user
   private loadMessages(userId: string): void {
     this.messages$ = this.chatService.getMessages(userId);
     this.messages$.subscribe(() => {
@@ -82,10 +89,10 @@ ngOnInit(): void {
     });
   }
 
+  // Scroll message view to the bottom
   private scrollToBottom(): void {
     try {
-      this.messageList.nativeElement.scrollTop =
-        this.messageList.nativeElement.scrollHeight;
+      this.messageList.nativeElement.scrollTop = this.messageList.nativeElement.scrollHeight;
     } catch (err) {
       console.warn('Scroll failed', err);
     }
@@ -95,7 +102,8 @@ ngOnInit(): void {
     return userId;
   }
 
-  // --- Last seen tracking ---
+  // --- Last seen logic ---
+
   private loadLastSeenTimestamps(): void {
     if (typeof window !== 'undefined' && window.localStorage) {
       const raw = localStorage.getItem('adminLastSeenTimestamps');
@@ -128,6 +136,7 @@ ngOnInit(): void {
     this.saveLastSeenTimestamps();
   }
 
+  // Get unique list of users who sent messages
   private extractUniqueUsers(messages: any[]): string[] {
     const seen = new Set<string>();
     const ordered: string[] = [];
@@ -142,6 +151,7 @@ ngOnInit(): void {
     return ordered;
   }
 
+  // Count how many unread messages exist for each user
   private calculateUnreadCounts(): void {
     this.unreadCounts = {};
     this.users.forEach(userId => {

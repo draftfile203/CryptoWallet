@@ -3,70 +3,80 @@ import { Router, RouterModule } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { AuthService } from '../services/auth.service';
 import Swal from 'sweetalert2';
-import { NgIf } from '@angular/common';
+
 
 @Component({
   selector: 'app-register',
-  imports: [RouterModule,ReactiveFormsModule,NgIf],
+  imports: [RouterModule,ReactiveFormsModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
 export class RegisterComponent {
+  registerForm: FormGroup;
 
-  registerForm: FormGroup
-  
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
+    // Initialize the registration form with validation
     this.registerForm = this.fb.group({
-      email: ['', [Validators.required,Validators.email]],
-      password: ['', [Validators.required,Validators.minLength(6)]],
-      firstname: ['', Validators.required],
-      lastname: ['', Validators.required],
-      personnumber: ['', Validators.required]
-      });
+      email: ['', [Validators.required, Validators.email]],               // Required valid email
+      password: ['', [Validators.required, Validators.minLength(6)]],    // Required password with min 6 chars
+      firstname: ['', Validators.required],                              // First name is required
+      lastname: ['', Validators.required],                               // Last name is required
+      personnumber: ['', Validators.required]                            // Person number is required
+    });
   }
 
+  // Triggered when the user submits the registration form
   onSubmit() {
-    if(this.registerForm.valid) {
-      const formData = this.registerForm.value
+    // Proceed only if the form is valid
+    if (this.registerForm.valid) {
+      const formData = this.registerForm.value;
+
+      // Call register method from AuthService
       this.authService.register(formData).subscribe(response => {
-        localStorage.setItem('RegisteredUser',JSON.stringify(formData))
+        // Optionally store the registered user in localStorage
+        localStorage.setItem('RegisteredUser', JSON.stringify(formData));
+        console.log('user registered:', formData);
+      });
 
-        console.log('user registered:', formData)
-      })
-
+      // Show success popup
       Swal.fire({
-    title: "SUCCESS",
-    text: "You are registered",
-    icon: "success",
-    background: "#121212",            // dark background
-    color: "#fff",                    // white text
-    iconColor: "#ff66c4",            // pink icon
-    confirmButtonColor: "#ff66c4",   // pink confirm button
-    customClass: {
-      popup: 'border-radius',
-      title: 'swal-title',
-      confirmButton: 'swal-button'
-    }
-  });
+        title: "SUCCESS",
+        text: "You are registered",
+        icon: "success",
+        background: "#121212",
+        color: "#fff",
+        iconColor: "#ff66c4",
+        confirmButtonColor: "#ff66c4",
+        customClass: {
+          popup: 'border-radius',
+          title: 'swal-title',
+          confirmButton: 'swal-button'
+        }
+      });
 
-      this.registerForm.reset()
-      this.router.navigate(['/login'])
-    }  else {
-  Swal.fire({
-    icon: "error",
-    title: "Oops...",
-    text: "Something went wrong!",
-    background: "#121212",
-    color: "#fff",
-    iconColor: "#ff66c4",
-    confirmButtonColor: "#ff66c4",
-    customClass: {
-      popup: 'border-radius',
-      title: 'swal-title',
-      confirmButton: 'swal-button'
-    }
-  });
+      // Reset form and redirect to login
+      this.registerForm.reset();
+      this.router.navigate(['/login']);
+    } else {
+      // Show error popup if form is invalid
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!",
+        background: "#121212",
+        color: "#fff",
+        iconColor: "#ff66c4",
+        confirmButtonColor: "#ff66c4",
+        customClass: {
+          popup: 'border-radius',
+          title: 'swal-title',
+          confirmButton: 'swal-button'
+        }
+      });
     }
   }
-
 }

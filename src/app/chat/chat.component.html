@@ -12,7 +12,7 @@
 
   <!-- Show logout button if logged in -->
   <ng-template #loggedIn>
-     <a routerLink="/dashboard" class="dashboard">Dashboard</a>
+    <a routerLink="/dashboard" class="dashboard">Dashboard</a>
     <button (click)="logout()" class="logout-button">Log Out</button>
   </ng-template>
 </div>
@@ -26,18 +26,16 @@
     <div class="messages-container" #messagesContainer>
       <div *ngFor="let msg of messages$ | async" [ngClass]="msg.sender">
     
-         {{ msg.text }}
+        {{ msg.text }}
       </div>
-
-   
     </div>
 
     <input 
-  [(ngModel)]="message" 
-  placeholder="Type a message..." 
-  (keydown.enter)="send()" />
+   [(ngModel)]="message" 
+   placeholder="Type a message..." 
+   (keydown.enter)="send()" />
 
-<button (click)="send()">Send</button>
+   <button (click)="send()">Send</button>
 
   </div>
 </section>

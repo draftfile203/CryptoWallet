@@ -14,7 +14,9 @@ declare var VANTA: any;
 export class AppComponent implements AfterViewInit, OnDestroy {
   private vantaEffect: any;
 
- constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {}
+
+  // Initializes the VANTA.NET background effect after the view is loaded
   ngAfterViewInit(): void {
     if (isPlatformBrowser(this.platformId)) {
       const VANTA = (window as any).VANTA;
@@ -39,6 +41,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     }
   }
 
+  // Cleans up the VANTA effect on component destroy to prevent memory leaks
   ngOnDestroy(): void {
     if (this.vantaEffect) {
       this.vantaEffect.destroy();

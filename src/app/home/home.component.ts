@@ -35,106 +35,100 @@ import { Router, RouterModule} from '@angular/router';
     ])
   ]
 })
-export class HomeComponent implements OnInit,AfterViewInit{ 
-  
-  @ViewChild('aboutSection') aboutSection!: ElementRef
+export class HomeComponent implements OnInit, AfterViewInit {
+  @ViewChild('aboutSection') aboutSection!: ElementRef;
   @ViewChild('faqSection') faqSection!: ElementRef;
-faqAnimated = false;
-    @ViewChild('statsSection') statsSection!: ElementRef;
-statsAnimated = false;
-@ViewChild('contactSection') contactSection!: ElementRef;
-contactAnimated = false;
+  @ViewChild('statsSection') statsSection!: ElementRef;
+  @ViewChild('contactSection') contactSection!: ElementRef;
 
-
-  
-  isLoggedIn = false
-
-  isScrolled = false
-
+  isLoggedIn = false;
+  isScrolled = false;
   mobileMenuOpen = false;
+  faqAnimated = false;
+  statsAnimated = false;
+  contactAnimated = false;
 
+  constructor(
+    private router: Router,
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
+
+  // Called when the component initializes
   ngOnInit(): void {
-    this.checkLoginStatus()
+    this.checkLoginStatus();
   }
-checkLoginStatus() {
-  if (isPlatformBrowser(this.platformId)) {
-    this.isLoggedIn = !!localStorage.getItem('loggedInUser');
+
+  // Checks localStorage to determine if a user is logged in
+  checkLoginStatus() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.isLoggedIn = !!localStorage.getItem('loggedInUser');
+    }
   }
-}
 
-constructor(
-  private router: Router,
-  private renderer: Renderer2,
-  @Inject(PLATFORM_ID) private platformId: Object
-) {}
-
- 
-  
-ngAfterViewInit(): void {
-  if (isPlatformBrowser(this.platformId)) {
-    this.initAboutSectionScroll();
-    this.observeFAQSection(); // ✅ add observer here
-       this.observeStatsSection(); //
-       this.observeContactSection();
+  // Called after the component’s view is initialized
+  ngAfterViewInit(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.initAboutSectionScroll();
+      this.observeFAQSection();
+      this.observeStatsSection();
+      this.observeContactSection();
+    }
   }
-}
 
-  // About section scroll-based transform and opacity
+  // Adds scroll listener for transforming About section content on scroll
   initAboutSectionScroll(): void {
     window.addEventListener('scroll', this.onScroll.bind(this));
   }
 
-onScroll(): void {
-  const section = this.aboutSection.nativeElement;
-  const rect = section.getBoundingClientRect();
-  const windowHeight = window.innerHeight;
+  // Handles scroll animation effects for the About section
+  onScroll(): void {
+    const section = this.aboutSection.nativeElement;
+    const rect = section.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
 
-  const scrollProgress = 1 - Math.abs((rect.top + rect.bottom - windowHeight) / (2 * windowHeight));
-  const clampedProgress = Math.max(0, Math.min(1, scrollProgress));
+    const scrollProgress = 1 - Math.abs((rect.top + rect.bottom - windowHeight) / (2 * windowHeight));
+    const clampedProgress = Math.max(0, Math.min(1, scrollProgress));
 
-  const img = section.querySelector('.about-img');
-  const text = section.querySelector('.aboutText');
+    const img = section.querySelector('.about-img');
+    const text = section.querySelector('.aboutText');
 
-  const translateX = (1 - clampedProgress) * 100;
+    const translateX = (1 - clampedProgress) * 100;
 
-  this.renderer.setStyle(img, 'transform', `translateX(${-translateX}px)`);
-  this.renderer.setStyle(img, 'opacity', `${clampedProgress}`);
+    this.renderer.setStyle(img, 'transform', `translateX(${-translateX}px)`);
+    this.renderer.setStyle(img, 'opacity', `${clampedProgress}`);
 
-  this.renderer.setStyle(text, 'transform', `translateX(${translateX}px)`);
-  this.renderer.setStyle(text, 'opacity', `${clampedProgress}`);
+    this.renderer.setStyle(text, 'transform', `translateX(${translateX}px)`);
+    this.renderer.setStyle(text, 'opacity', `${clampedProgress}`);
 
-  // 🎯 Fade in background when content is fully in place
-  const bgOpacity = clampedProgress >= 0.98 ? 0.7 : 0;
-  this.renderer.setStyle(section, 'background-color', `rgba(0, 0, 0, ${bgOpacity})`);
-}
-// FAQ scroll-in animation
-observeFAQSection(): void {
-  const section = this.faqSection.nativeElement;
-  const items = section.querySelectorAll('.faq-item');
+    // Fades in section background only when content is fully in view
+    const bgOpacity = clampedProgress >= 0.98 ? 0.7 : 0;
+    this.renderer.setStyle(section, 'background-color', `rgba(0, 0, 0, ${bgOpacity})`);
+  }
 
-  const observer = new IntersectionObserver(
-    (entries) => {
+  // Triggers FAQ items' appearance once in viewport
+  observeFAQSection(): void {
+    const section = this.faqSection.nativeElement;
+    const items = section.querySelectorAll('.faq-item');
+
+    const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && !this.faqAnimated) {
-        items.forEach((el: any) => {
-          el.classList.add('visible');
-        });
+        items.forEach((el: any) => el.classList.add('visible'));
         this.faqAnimated = true;
       }
-    },
-    { threshold: 0.3 }
-  );
+    }, { threshold: 0.3 });
 
-  observer.observe(section);
-}
+    observer.observe(section);
+  }
 
-observeStatsSection(): void {
-  if (!this.statsSection || this.statsAnimated) return;
+  // Triggers counter animation for statistics when section is in view
+  observeStatsSection(): void {
+    if (!this.statsSection || this.statsAnimated) return;
 
-  const section = this.statsSection.nativeElement;
-  const counters = section.querySelectorAll('h2');
+    const section = this.statsSection.nativeElement;
+    const counters = section.querySelectorAll('h2');
 
-  const observer = new IntersectionObserver(
-    (entries) => {
+    const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && !this.statsAnimated) {
         this.statsAnimated = true;
 
@@ -160,84 +154,93 @@ observeStatsSection(): void {
           requestAnimationFrame(updateCounter);
         });
       }
-    },
-    { threshold: 0.3 }
-  );
+    }, { threshold: 0.3 });
 
-  observer.observe(section);
-}
+    observer.observe(section);
+  }
 
+  // Triggers contact section's left/right animation when scrolled into view
+  observeContactSection(): void {
+    if (!this.contactSection || this.contactAnimated) return;
 
-observeContactSection(): void {
-  if (!this.contactSection || this.contactAnimated) return;
+    const section = this.contactSection.nativeElement;
+    const left = section.querySelector('.contact1');
+    const right = section.querySelector('.contact-form');
 
-  const section = this.contactSection.nativeElement;
-  const left = section.querySelector('.contact1');
-  const right = section.querySelector('.contact-form');
-
-  const observer = new IntersectionObserver(
-    (entries) => {
+    const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && !this.contactAnimated) {
         this.contactAnimated = true;
-
-        // Apply animations
         left.classList.add('animate-left');
         right.classList.add('animate-right');
       }
-    },
-    { threshold: 0.3 }
-  );
+    }, { threshold: 0.3 });
 
-  observer.observe(section);
-}
-
-
-
-  @HostListener('window:scroll', [])
-  onWindowScroll() {
-    this.isScrolled = window.scrollY > 50
+    observer.observe(section);
   }
 
+  // Updates the `isScrolled` flag to toggle sticky header or visual changes
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.isScrolled = window.scrollY > 50;
+  }
+
+  // Smoothly scrolls to a section by ID
   scrollTo(sectionId: string) {
-    const element = document.getElementById(sectionId)
-    if(element) {
-      element.scrollIntoView({ behavior: 'smooth'})
+    const element = document.getElementById(sectionId);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth' });
     }
   }
 
-  questions = [
-    {question: 'What is cryptocurrency trading?', answer: 'Cryptocurrency trading involves buying and selling digital currencies like Bitcoin or Ethereum with the goal of making a profit. Prices are driven by supply, demand, and market sentiment.', open: false},
-    {question: 'Is crypto trading safe?', answer: 'Crypto trading can be safe when using trusted platforms and practicing risk management. However, like any investment, it carries risks due to market volatility. Always trade responsibly.', open: false},
-    {question: 'Do I need a wallet to start trading?', answer: 'Most trading platforms offer built-in wallets, so you can start trading without an external one. For long-term storage, using a private wallet is recommended for security.', open: false},
-    {question: 'Can beginners start trading on your platform?', answer: 'Absolutely! Our platform is designed for all levels. We offer guides, support, and intuitive tools to help beginners trade confidently and learn as they grow.', open: false}
-  ]
-
-
-
+  // FAQ accordion toggle logic
   toggleAnswer(index: number) {
-   
-      this.questions[index].open = !this.questions[index].open;
-    
+    this.questions[index].open = !this.questions[index].open;
   }
 
+  // Toggles mobile menu open/close state
   toggleMobileMenu() {
-  this.mobileMenuOpen = !this.mobileMenuOpen;
-}
+    this.mobileMenuOpen = !this.mobileMenuOpen;
+  }
 
-closeMobileMenu() {
-  this.mobileMenuOpen = false;
-}
+  // Forces mobile menu to close
+  closeMobileMenu() {
+    this.mobileMenuOpen = false;
+  }
 
+  // Navigates to a section and closes mobile menu
+  navigateAndClose(section: string) {
+    this.scrollTo(section);
+    this.closeMobileMenu();
+  }
 
-navigateAndClose(section: string) {
-  this.scrollTo(section);
-  this.closeMobileMenu();
-}
-
+  // Clears user session and navigates to main page
   logout() {
     localStorage.removeItem('loggedInUser');
     this.isLoggedIn = false;
     this.router.navigate(['/main']);
   }
 
+  // FAQ questions and answers content
+  questions = [
+    {
+      question: 'What is cryptocurrency trading?',
+      answer: 'Cryptocurrency trading involves buying and selling digital currencies like Bitcoin or Ethereum with the goal of making a profit. Prices are driven by supply, demand, and market sentiment.',
+      open: false
+    },
+    {
+      question: 'Is crypto trading safe?',
+      answer: 'Crypto trading can be safe when using trusted platforms and practicing risk management. However, like any investment, it carries risks due to market volatility. Always trade responsibly.',
+      open: false
+    },
+    {
+      question: 'Do I need a wallet to start trading?',
+      answer: 'Most trading platforms offer built-in wallets, so you can start trading without an external one. For long-term storage, using a private wallet is recommended for security.',
+      open: false
+    },
+    {
+      question: 'Can beginners start trading on your platform?',
+      answer: 'Absolutely! Our platform is designed for all levels. We offer guides, support, and intuitive tools to help beginners trade confidently and learn as they grow.',
+      open: false
+    }
+  ];
 }

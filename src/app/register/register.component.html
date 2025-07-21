@@ -1,31 +1,39 @@
 <section>
-    <a href="/main" class="logo">
-      <h1>CryptoWallet</h1>
-    </a>
-    <div class="signup-container">
-        <h2>Sign up your account</h2>
-        <form class="signup-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-          <label>Firstname
-            <input type="text" formControlName="firstname" placeholder="Firstname" required />
-          </label>
-          <label>Lastname
-            <input type="text" formControlName="lastname" placeholder="Lastname" required />
-          </label>
-          <label>Email
-            <input type="email" formControlName="email" placeholder="Email" required />
-          </label>
-          <label>Phone Number
-            <input type="tel" formControlName="personnumber" placeholder="Number" required />
-          </label>
-          <label>Password
-            <input type="password" formControlName="password" placeholder="Password" required />
-          </label>
-          <p>At least 6 Characters</p>
-          <label>Confirm Password
-            <input type="password" placeholder="Confirm Password" required />
-          </label>
-          <button type="submit" class="signup-btn">Sign up</button>
-        </form>
-    </div>
+  <a href="/main" class="logo">
+    <h1>CryptoWallet</h1>
+  </a>
+  <div class="signup-container">
+    <h2>Sign up your account</h2>
+    <form class="signup-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
       
+      <label>Firstname
+      <input type="text" formControlName="firstname" placeholder="Firstname" required />
+      </label>
+      
+      <label>Lastname
+      <input type="text" formControlName="lastname" placeholder="Lastname" required />
+      </label>
+      
+      <label>Email
+      <input type="email" formControlName="email" placeholder="Email" required />
+      </label>
+      
+      <label>Phone Number
+      <input type="tel" formControlName="personnumber" placeholder="Number" required />
+      </label>
+      
+      <label>Password
+      <input type="password" formControlName="password" placeholder="Password" required />
+      </label>
+      
+      <p>At least 6 Characters</p>
+      
+      <label>Confirm Password
+      <input type="password" placeholder="Confirm Password" required />
+      </label>
+      
+      <button type="submit" class="signup-btn">Sign up</button>
+    
+    </form>
+  </div>      
 </section>

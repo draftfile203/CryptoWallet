@@ -13,59 +13,70 @@ import Swal from 'sweetalert2';
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
+  constructor(
+    private fb: FormBuilder,
+    private authService: AuthService,
+    private router: Router
+  ) {
+    // Initialize the login form with validation rules
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]]
+      email: ['', [Validators.required, Validators.email]], // Email is required and must be a valid email format
+      password: ['', [Validators.required]] // Password is required
     });
   }
 
+  // Triggered when user submits the login form
   onSubmit() {
+    // Proceed only if the form is valid
     if (this.loginForm.valid) {
       const formData = this.loginForm.value;
 
+      // Send login request via AuthService
       this.authService.login(formData).subscribe(response => {
 
-      if(response.success){
+        // If login successful
+        if (response.success) {
+          // Store user data in local storage
+          localStorage.setItem('loggedInUser', JSON.stringify(response.user));
 
-        localStorage.setItem('loggedInUser', JSON.stringify(response.user))
-        
-         Swal.fire({
-    title: 'Welcome!',
-    text: 'You are logged in',
-    icon: 'success',
-    background: '#121212',           // Dark background
-    color: '#fff',                   // White text
-    iconColor: '#ff66c4',            // Pink icon
-    confirmButtonColor: '#ff66c4',   // Pink confirm button
-    customClass: {
-      popup: 'border-radius',
-      title: 'swal-title',
-      confirmButton: 'swal-button'
-    }
-  });
-          this.loginForm.reset()
-          this.router.navigate(['/dashboard'])
+          // Show success notification using SweetAlert
+          Swal.fire({
+            title: 'Welcome!',
+            text: 'You are logged in',
+            icon: 'success',
+            background: '#121212',
+            color: '#fff',
+            iconColor: '#ff66c4',
+            confirmButtonColor: '#ff66c4',
+            customClass: {
+              popup: 'border-radius',
+              title: 'swal-title',
+              confirmButton: 'swal-button'
+            }
+          });
+
+          // Reset the form and redirect to dashboard
+          this.loginForm.reset();
+          this.router.navigate(['/dashboard']);
+        } 
+        // If login fails
+        else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Login Failed',
+            text: 'Invalid email or password!',
+            background: '#121212',
+            color: '#fff',
+            iconColor: '#ff66c4',
+            confirmButtonColor: '#ff66c4',
+            customClass: {
+              popup: 'border-radius',
+              title: 'swal-title',
+              confirmButton: 'swal-button'
+            }
+          });
         }
-         else {
-           Swal.fire({
-    icon: 'error',
-    title: 'Login Failed',
-    text: 'Invalid email or password!',
-    background: '#121212',
-    color: '#fff',
-    iconColor: '#ff66c4',
-    confirmButtonColor: '#ff66c4',
-    customClass: {
-      popup: 'border-radius',
-      title: 'swal-title',
-      confirmButton: 'swal-button'
+      });
     }
-  });
-        }
-    
-      })
   }
-
-}
 }

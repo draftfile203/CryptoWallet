@@ -1,10 +1,10 @@
 section {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-    height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  height: 100vh;
 }
 
 .logo {
@@ -27,7 +27,7 @@ section {
   width: 320px;
   font-family: 'Segoe UI', sans-serif;
   color: #fff;
-    animation: slideFromBottom 0.8s ease-out forwards;
+  animation: slideFromBottom 0.8s ease-out forwards;
   animation-delay: 0.4s;
   opacity: 0;
 }

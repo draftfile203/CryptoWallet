@@ -14,14 +14,26 @@ import { Router, RouterModule } from '@angular/router';
 })
 export class ChatComponent implements OnInit {
 
-  @ViewChild('messagesContainer') messagesContainer!: ElementRef
+  // Reference to the messages container for scrolling
+  @ViewChild('messagesContainer') messagesContainer!: ElementRef;
 
+  // User input message
   message = '';
+
+  // Observable stream of messages
   messages$: Observable<any[]> = of([]);
+
+  // Unique identifier for the user
   userId = '';
+
+  // Whether the current user is an admin
   isAdmin = false;
+
+  // Tracks if welcome message has already been sent
   hasSentFirstMessage = false;
-  isLoggedIn = false
+
+  // Whether the user is logged in
+  isLoggedIn = false;
 
   constructor(
     private chatService: ChatService,
@@ -30,10 +42,10 @@ export class ChatComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-
-      this.checkLoginStatus()
+    this.checkLoginStatus();
 
     if (isPlatformBrowser(this.platformId)) {
+      // Retrieve or generate a unique ID for the chat user
       let id = localStorage.getItem('chatUserId');
       if (!id) {
         id = crypto.randomUUID();
@@ -41,61 +53,66 @@ export class ChatComponent implements OnInit {
       }
       this.userId = id;
 
+      // Load messages for the user
       this.messages$ = this.chatService.getMessages(this.userId);
+
+      // Scroll to bottom when messages load
       this.messages$.subscribe(() => {
-      setTimeout(() => this.scrollToBottom(), 100);
-    });
+        setTimeout(() => this.scrollToBottom(), 100);
+      });
     }
   }
-  
-checkLoginStatus() { 
-  if (isPlatformBrowser(this.platformId)) {
-    this.isLoggedIn = !!localStorage.getItem('loggedInUser');
-  } else {
-    this.isLoggedIn = false;
+
+  // Check if user is logged in
+  checkLoginStatus() {
+    if (isPlatformBrowser(this.platformId)) {
+      this.isLoggedIn = !!localStorage.getItem('loggedInUser');
+    } else {
+      this.isLoggedIn = false;
+    }
   }
-}
 
-
-
+  // Send a message from the user
   send() {
-  if (!this.userId) return;
+    if (!this.userId) return;
 
-  if (this.message.trim()) {
-    this.chatService.sendMessage(this.message, 'user', this.userId);
+    if (this.message.trim()) {
+      // Send user's message
+      this.chatService.sendMessage(this.message, 'user', this.userId);
 
-    const alreadyWelcomed = localStorage.getItem('hasSentFirstMessage');
+      // Auto-send admin welcome message once
+      const alreadyWelcomed = localStorage.getItem('hasSentFirstMessage');
+      if (!alreadyWelcomed) {
+        localStorage.setItem('hasSentFirstMessage', 'true');
+        setTimeout(() => {
+          this.chatService.sendMessage(
+            "Hello, our agent will be in touch in short.",
+            'admin',
+            this.userId
+          );
+        }, 500);
+      }
 
-    if (!alreadyWelcomed) {
-      localStorage.setItem('hasSentFirstMessage', 'true');
-      setTimeout(() => {
-        this.chatService.sendMessage(
-          "Hello, our agent will be in touch in short.",
-          'admin',
-          this.userId
-        );
-      }, 500);
+      // Clear input field
+      this.message = '';
     }
-
-    this.message = '';
   }
-}
 
-scrollToBottom() {
-  try {
-    this.messagesContainer.nativeElement.scrollTop =
-      this.messagesContainer.nativeElement.scrollHeight;
-  } catch (err) {
-    console.error('Failed to scroll:', err);
+  // Scroll chat view to bottom
+  scrollToBottom() {
+    try {
+      this.messagesContainer.nativeElement.scrollTop =
+        this.messagesContainer.nativeElement.scrollHeight;
+    } catch (err) {
+      console.error('Failed to scroll:', err);
+    }
   }
-}
 
-
+  // Log the user out and redirect to main page
   logout() {
     localStorage.removeItem('loggedInUser');
     this.isLoggedIn = false;
     this.router.navigate(['/main']);
   }
-
 
 }

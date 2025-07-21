@@ -1,26 +1,24 @@
 <section>
-    <a href="/main" class="logo">
-      <h1>CryptoWallet</h1>
-    </a>
-    <div class="login-container">
-        <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-          <h2>Sign in</h2>
+  <a href="/main" class="logo">
+    <h1>CryptoWallet</h1>
+  </a>
+  <div class="login-container">
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <h2>Sign in</h2>
           
-          <label for="email">Email</label>
-          <input type="email" id="email" formControlName="email" placeholder="hello@example.com" required>
+      <label for="email">Email</label>
+      <input type="email" id="email" formControlName="email" placeholder="hello@example.com" required>
           
-          <label for="password">Password</label>
-          <input type="password" id="password" formControlName="password" placeholder="Password" required>
+      <label for="password">Password</label>
+      <input type="password" id="password" formControlName="password" placeholder="Password" required>
       
-          <div class="remember-me">
-            <input type="checkbox" id="remember">
-            <label for="remember">Remember me</label>
-          </div>
-      
-          <button type="submit" [disabled]="loginForm.invalid" class="sign-in-btn">Sign in</button>
-      
-       
-        </form>
+      <div class="remember-me">
+        <input type="checkbox" id="remember">
+        <label for="remember">Remember me</label>
       </div>
       
+      <button type="submit" [disabled]="loginForm.invalid" class="sign-in-btn">Sign in</button>
+         
+    </form>
+  </div> 
 </section>

@@ -1,16 +1,15 @@
-
 <header [ngClass]="{'scrolled' : isScrolled}">
-    <a href="/main" class="logo">
-       <p>CryptoWallet</p>
-    </a>
 
-      <!-- Burger Icon -->
+  <a href="/main" class="logo">
+   <p>CryptoWallet</p>
+  </a>
+
+  <!-- Burger Icon -->
   <div class="burger" (click)="toggleMobileMenu()">
     <span></span>
     <span></span>
     <span></span>
   </div>
-
    
   <!-- Desktop Nav -->
   <nav class="desktop-nav">
@@ -32,150 +31,155 @@
     </ng-template>
   </div>
 
-  <!-- Mobile Menu -->
-<!-- Mobile Menu -->
-<div class="mobile-menu" *ngIf="mobileMenuOpen">
- <nav>
-  <a href="#" (click)="navigateAndClose('home'); $event.preventDefault()">Home</a>
-  <a href="#" (click)="navigateAndClose('features'); $event.preventDefault()">Crypto</a>
-  <a href="#" (click)="navigateAndClose('about'); $event.preventDefault()">About</a>
-  <a href="#" (click)="navigateAndClose('FAQ'); $event.preventDefault()">FAQ</a>  <a href="#" (click)="navigateAndClose('contact'); $event.preventDefault()">Contact</a>
-</nav>
+ <!-- Mobile Menu -->
+  <div class="mobile-menu" *ngIf="mobileMenuOpen">
+   <nav>
+   <a href="#" (click)="navigateAndClose('home'); $event.preventDefault()">Home</a>
+   <a href="#" (click)="navigateAndClose('features'); $event.preventDefault()">Crypto</a>
+   <a href="#" (click)="navigateAndClose('about'); $event.preventDefault()">About</a>
+   <a href="#" (click)="navigateAndClose('FAQ'); $event.preventDefault()">FAQ</a>  <a href="#" (click)="navigateAndClose('contact'); $event.preventDefault()">Contact</a>
+   </nav>
 
-  <div class="login">
-    <ng-container *ngIf="!isLoggedIn; else loggedInMobile">
-      <a routerLink="/login" (click)="closeMobileMenu()">Log In</a>
-      <a routerLink="/register" (click)="closeMobileMenu()">Sign Up</a>
-    </ng-container>
-    <ng-template #loggedInMobile>
-      <a routerLink="/dashboard" (click)="closeMobileMenu()">Dashboard</a>
-      <button (click)="logout(); closeMobileMenu()">Log Out</button>
-    </ng-template>
+   <div class="login">
+     <ng-container *ngIf="!isLoggedIn; else loggedInMobile">
+       <a routerLink="/login" (click)="closeMobileMenu()">Log In</a>
+       <a routerLink="/register" (click)="closeMobileMenu()">Sign Up</a>
+      </ng-container>
+     <ng-template #loggedInMobile>
+       <a routerLink="/dashboard" (click)="closeMobileMenu()">Dashboard</a>
+       <button (click)="logout(); closeMobileMenu()">Log Out</button>
+      </ng-template>
   </div>
-</div>
+ </div>
 
 </header>
 
-<main>
-    <section id="home">
-        <h1>Your Path to Digital Excellence</h1>
-        <p>Take control of your crypto future. Manage, monitor, and grow your assets confidently using our all-in-one secure crypto platform.</p>
-        <div class="homeLogin">
-            <button routerLink="/register">Join Now</button>
-            <a routerLink="/login">Already a Customer? Login➝</a>
-        </div>
-    </section>
-    <section id="features">
-      <div class="featuresall">
-        <div class="featuresOne">
+<!--------------------------------------------------------------------------------------MAIN SECTION-------------------------------------------------------------------------------------------->
+ <main>
+
+<!--------------------------------------------------------------------------------------INTRO TEXT FOR APP------------------------------------------------------------------------------------------->
+  <section id="home">
+    <h1>Your Path to Digital Excellence</h1>
+    <p>Take control of your crypto future. Manage, monitor, and grow your assets confidently using our all-in-one secure crypto platform.</p>
+    <div class="homeLogin">
+      <button routerLink="/register">Join Now</button>
+      <a routerLink="/login">Already a Customer? Login➝</a>
+    </div>
+  </section>
+
+<!--------------------------------------------------------------------------------------CRYPTO CURRENCIES------------------------------------------------------------------------------------------>
+  <section id="features">
+    <div class="featuresall">
+      <div class="featuresOne">
         <h1>Join the Crypto Movement</h1>
-        </div>
-        <div class="featuresTwo">
-            <div class="icon">
-<svg fill="#d92083" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" d="M16 32C7.163 32 0 24.837 0 16S7.163 0 16 0s16 7.163 16 16-7.163 16-16 16zm7.189-17.98c.314-2.096-1.283-3.223-3.465-3.975l.708-2.84-1.728-.43-.69 2.765c-.454-.114-.92-.22-1.385-.326l.695-2.783L15.596 6l-.708 2.839c-.376-.086-.746-.17-1.104-.26l.002-.009-2.384-.595-.46 1.846s1.283.294 1.256.312c.7.175.826.638.805 1.006l-.806 3.235c.048.012.11.03.18.057l-.183-.045-1.13 4.532c-.086.212-.303.531-.793.41.018.025-1.256-.313-1.256-.313l-.858 1.978 2.25.561c.418.105.828.215 1.231.318l-.715 2.872 1.727.43.708-2.84c.472.127.93.245 1.378.357l-.706 2.828 1.728.43.715-2.866c2.948.558 5.164.333 6.097-2.333.752-2.146-.037-3.385-1.588-4.192 1.13-.26 1.98-1.003 2.207-2.538zm-3.95 5.538c-.533 2.147-4.148.986-5.32.695l.95-3.805c1.172.293 4.929.872 4.37 3.11zm.535-5.569c-.487 1.953-3.495.96-4.47.717l.86-3.45c.975.243 4.118.696 3.61 2.733z"></path></g></svg>
-                <h2>BTC</h2>
-             </div>
-             <div class="icon">
-<svg fill="#d92083" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g fill-rule="evenodd"> <path d="M16 32C7.163 32 0 24.837 0 16S7.163 0 16 0s16 7.163 16 16-7.163 16-16 16zm7.994-15.781L16.498 4 9 16.22l7.498 4.353 7.496-4.354zM24 17.616l-7.502 4.351L9 17.617l7.498 10.378L24 17.616z"></path> <g fill-rule="nonzero"> <path fill-opacity=".298" d="M16.498 4v8.87l7.497 3.35zm0 17.968v6.027L24 17.616z"></path> <path fill-opacity=".801" d="M16.498 20.573l7.497-4.353-7.497-3.348z"></path> <path fill-opacity=".298" d="M9 16.22l7.498 4.353v-7.701z"></path> </g> </g> </g></svg>
-                <h2>ETH</h2>
-             </div>
-             <div class="icon">
-              <svg fill="#d92083" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" d="M16 32C7.163 32 0 24.837 0 16S7.163 0 16 0s16 7.163 16 16-7.163 16-16 16zm-5.573-12.786L9.252 24h12.875L23 20.429h-7.722l.848-3.483 1.427-.571.68-2.75-1.41.571L18.342 8h-5.129l-2.081 8.429-1.444.58L9 19.768l1.427-.554z"></path></g></svg>
-                <h2>LTC</h2>
-             </div>
-             <div class="icon">
-<svg fill="#d92083" class="bnb" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M16 32C7.163 32 0 24.837 0 16S7.163 0 16 0s16 7.163 16 16-7.163 16-16 16zm-3.884-17.596L16 10.52l3.886 3.886 2.26-2.26L16 6l-6.144 6.144 2.26 2.26zM6 16l2.26 2.26L10.52 16l-2.26-2.26L6 16zm6.116 1.596l-2.263 2.257.003.003L16 26l6.146-6.146v-.001l-2.26-2.26L16 21.48l-3.884-3.884zM21.48 16l2.26 2.26L26 16l-2.26-2.26L21.48 16zm-3.188-.002h.001L16 13.706 14.305 15.4l-.195.195-.401.402-.004.003.004.003 2.29 2.291 2.294-2.293.001-.001-.002-.001z"></path></g></svg>
-                <h2>BNB</h2>
-             </div>
+      </div>
+      <div class="featuresTwo">
+          <div class="icon">
+            <svg fill="#d92083" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" d="M16 32C7.163 32 0 24.837 0 16S7.163 0 16 0s16 7.163 16 16-7.163 16-16 16zm7.189-17.98c.314-2.096-1.283-3.223-3.465-3.975l.708-2.84-1.728-.43-.69 2.765c-.454-.114-.92-.22-1.385-.326l.695-2.783L15.596 6l-.708 2.839c-.376-.086-.746-.17-1.104-.26l.002-.009-2.384-.595-.46 1.846s1.283.294 1.256.312c.7.175.826.638.805 1.006l-.806 3.235c.048.012.11.03.18.057l-.183-.045-1.13 4.532c-.086.212-.303.531-.793.41.018.025-1.256-.313-1.256-.313l-.858 1.978 2.25.561c.418.105.828.215 1.231.318l-.715 2.872 1.727.43.708-2.84c.472.127.93.245 1.378.357l-.706 2.828 1.728.43.715-2.866c2.948.558 5.164.333 6.097-2.333.752-2.146-.037-3.385-1.588-4.192 1.13-.26 1.98-1.003 2.207-2.538zm-3.95 5.538c-.533 2.147-4.148.986-5.32.695l.95-3.805c1.172.293 4.929.872 4.37 3.11zm.535-5.569c-.487 1.953-3.495.96-4.47.717l.86-3.45c.975.243 4.118.696 3.61 2.733z"></path></g></svg>
+            <h2>BTC</h2>
+            </div>
+          <div class="icon">
+            <svg fill="#d92083" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g fill-rule="evenodd"> <path d="M16 32C7.163 32 0 24.837 0 16S7.163 0 16 0s16 7.163 16 16-7.163 16-16 16zm7.994-15.781L16.498 4 9 16.22l7.498 4.353 7.496-4.354zM24 17.616l-7.502 4.351L9 17.617l7.498 10.378L24 17.616z"></path> <g fill-rule="nonzero"> <path fill-opacity=".298" d="M16.498 4v8.87l7.497 3.35zm0 17.968v6.027L24 17.616z"></path> <path fill-opacity=".801" d="M16.498 20.573l7.497-4.353-7.497-3.348z"></path> <path fill-opacity=".298" d="M9 16.22l7.498 4.353v-7.701z"></path> </g> </g> </g></svg>
+            <h2>ETH</h2>
+          </div>
+          <div class="icon">
+            <svg fill="#d92083" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path fill-rule="evenodd" d="M16 32C7.163 32 0 24.837 0 16S7.163 0 16 0s16 7.163 16 16-7.163 16-16 16zm-5.573-12.786L9.252 24h12.875L23 20.429h-7.722l.848-3.483 1.427-.571.68-2.75-1.41.571L18.342 8h-5.129l-2.081 8.429-1.444.58L9 19.768l1.427-.554z"></path></g></svg>
+            <h2>LTC</h2>
+          </div>
+          <div class="icon">
+            <svg fill="#d92083" class="bnb" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"><path d="M16 32C7.163 32 0 24.837 0 16S7.163 0 16 0s16 7.163 16 16-7.163 16-16 16zm-3.884-17.596L16 10.52l3.886 3.886 2.26-2.26L16 6l-6.144 6.144 2.26 2.26zM6 16l2.26 2.26L10.52 16l-2.26-2.26L6 16zm6.116 1.596l-2.263 2.257.003.003L16 26l6.146-6.146v-.001l-2.26-2.26L16 21.48l-3.884-3.884zM21.48 16l2.26 2.26L26 16l-2.26-2.26L21.48 16zm-3.188-.002h.001L16 13.706 14.305 15.4l-.195.195-.401.402-.004.003.004.003 2.29 2.291 2.294-2.293.001-.001-.002-.001z"></path></g></svg>
+            <h2>BNB</h2>
+          </div>
+      </div>
+    </div>
+  </section>
+
+<!--------------------------------------------------------------------------------------ABOUT COMPANY------------------------------------------------------------------------------------------->
+  <section id="about" #aboutSection>
+   <img src="assets/manandwomen.webp" alt="" class="about-img" />     
+   <div class="aboutText">
+     <h1>Who We Are</h1>
+     <h2>Your Gateway to Smarter Crypto Trading</h2>
+     <p>
+      We're reshaping how traders interact with the crypto market. With real-time insights, powerful tools, and a user-first experience, we help you trade with confidence. Whether you're a beginner or a seasoned investor, our platform empowers you to navigate the volatility and unlock true potential in digital assets.
+     </p>
+    </div>
+  </section>
+
+<!-----------------------------------------------------------------------------------FREQUENTLY ASKED QUESTIONS---------------------------------------------------------------------------------->
+  <section id="FAQ" #faqSection>
+    <h1>FAQ</h1>
+    <h2>Any Questions? Answered</h2>
+    <div class="faqQuestions">
+      <div *ngFor="let qa of questions; let i = index" [ngClass]="'faq-item faq-animate-' + i">
+       <h3 (click)="toggleAnswer(i)" style="cursor:pointer" class="faqQue">
+        {{ qa.question }}
+       </h3>
+       <p class="faq-answer" [@expandCollapse]="qa.open ? 'open' : 'closed'">
+       <span class="faq-answer-inner">{{ qa.answer }}</span>
+       </p>
+      </div>
+    </div>
+  </section>
+
+<!--------------------------------------------------------------------------------------COMPANY STATS------------------------------------------------------------------------------------------->
+  <section class="stats-section" #statsSection>
+    <div class="stat-box">
+     <h2 data-target="56" data-suffix="K+">0K+</h2>
+     <p>PROJECT DONE</p>
+    </div>
+    <div class="stat-box">
+     <h2 data-target="38" data-suffix="K+">0K+</h2>
+     <p>HAPPY CLIENT</p>
+    </div>
+    <div class="stat-box">
+     <h2 data-target="4.7" data-suffix="">0</h2>
+     <p>CLIENT RATINGS</p>
+    </div>
+    <div class="stat-box">
+     <h2 data-target="35" data-suffix="+">0+</h2>
+     <p>AWARD WINNING</p>
+    </div>
+  </section>
+
+<!--------------------------------------------------------------------------------------CONTACT US------------------------------------------------------------------------------------------->
+  <section id="contact" #contactSection>
+    <div class="contact1">
+      <h1>Contact Us</h1>
+      <h2>Love to hear from you!</h2>
+      <div class="email">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffc0cb"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 7L10.94 11.3375C11.5885 11.7428 12.4115 11.7428 13.06 11.3375L20 7M5 18H19C20.1046 18 21 17.1046 21 16V8C21 6.89543 20.1046 6 19 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18Z" stroke="#ffc0cb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>           
+       <div class="em">
+         <h3>How can we help?</h3>
+         <p>support&#64;support.net</p>
         </div>
       </div>
-    </section>
- <section id="about" #aboutSection>
-  <img src="assets/manandwomen.webp" alt="" class="about-img" />     
-  <div class="aboutText">
-    <h1>Who We Are</h1>
-    <h2>Your Gateway to Smarter Crypto Trading</h2>
-    <p>
-      We're reshaping how traders interact with the crypto market. With real-time insights, powerful tools, and a user-first experience, we help you trade with confidence. Whether you're a beginner or a seasoned investor, our platform empowers you to navigate the volatility and unlock true potential in digital assets.
-    </p>
-  </div>
-</section>
-
-  <section id="FAQ" #faqSection>
-  <h1>FAQ</h1>
-  <h2>Any Questions? Answered</h2>
-  <div class="faqQuestions">
-    <div *ngFor="let qa of questions; let i = index" [ngClass]="'faq-item faq-animate-' + i">
-      <h3 (click)="toggleAnswer(i)" style="cursor:pointer" class="faqQue">
-        {{ qa.question }}
-      </h3>
-      <p class="faq-answer" [@expandCollapse]="qa.open ? 'open' : 'closed'">
-        <span class="faq-answer-inner">{{ qa.answer }}</span>
-      </p>
     </div>
-  </div>
-</section>
+   <!--FORM TO SEND MESSAGE--->
+   <div class="contact-form">
+     <h2>Send us a Message</h2>
+     <form>
+       <label>Full Name*</label>
+       <input type="text" placeholder="Jhon Doe" required />
 
-<section class="stats-section" #statsSection>
-  <div class="stat-box">
-    <h2 data-target="56" data-suffix="K+">0K+</h2>
-    <p>PROJECT DONE</p>
-  </div>
-  <div class="stat-box">
-    <h2 data-target="38" data-suffix="K+">0K+</h2>
-    <p>HAPPY CLIENT</p>
-  </div>
-  <div class="stat-box">
-    <h2 data-target="4.7" data-suffix="">0</h2>
-    <p>CLIENT RATINGS</p>
-  </div>
-  <div class="stat-box">
-    <h2 data-target="35" data-suffix="+">0+</h2>
-    <p>AWARD WINNING</p>
-  </div>
-</section>
+       <label>Email*</label>
+       <input type="email" placeholder="example@yourmail.com" required />
 
+       <label>Phone*</label>
+       <input type="tel" placeholder="+996 3232 1231 345" required />
 
-    <section id="contact" #contactSection>
-        <div class="contact1">
-        <h1>Contact Us</h1>
-        <h2>Love to hear from you!</h2>
-        <div class="email">
-         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#ffc0cb"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M4 7L10.94 11.3375C11.5885 11.7428 12.4115 11.7428 13.06 11.3375L20 7M5 18H19C20.1046 18 21 17.1046 21 16V8C21 6.89543 20.1046 6 19 6H5C3.89543 6 3 6.89543 3 8V16C3 17.1046 3.89543 18 5 18Z" stroke="#ffc0cb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>            <div class="em">
-            <h3>How can we help?</h3>
-            <p>support&#64;support.net</p>
-            </div>
-        </div>
-        </div>
+       <label>Message*</label>
+       <textarea placeholder="type your message here" required></textarea>
 
- <div class="contact-form">
-  <h2>Send us a Message</h2>
-  <form>
-    <label>Full Name*</label>
-    <input type="text" placeholder="Jhon Doe" required />
-
-    <label>Email*</label>
-    <input type="email" placeholder="example@yourmail.com" required />
-
-    <label>Phone*</label>
-    <input type="tel" placeholder="+996 3232 1231 345" required />
-
-    <label>Message*</label>
-    <textarea placeholder="type your message here" required></textarea>
-
-    <button type="submit">Send Message</button>
-  </form>
-</div>
-
-
-       
-      <button class="chat-toggle-button" routerLink="/chat">Contact Support</button>
-
+       <button type="submit">Send Message</button>
+      </form>
+    </div>
+   <!--CONTACT SUPPORT FROM LIVE CHAT-->
+   <button class="chat-toggle-button" routerLink="/chat">Contact Support</button> 
           
-    </section>
+  </section>
 </main>
 
-
 <footer>
-    <h1>We create best experiences in the industry.</h1>
+  <h1>We create best experiences in the industry.</h1>
 </footer>

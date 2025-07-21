@@ -16,7 +16,6 @@ section {
 .admin-panel input {
     padding: 8px 20px;
     border-radius: 4px;
-
 }
 
 .admin-panel button {
@@ -25,7 +24,6 @@ section {
     border: 1px solid green;
     border-radius: 4px;
     cursor: pointer;
-
 }
 
 .delete-btn {

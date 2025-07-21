@@ -1,11 +1,11 @@
 section {
-   display: flex;
-   flex-direction: column;
-   align-items: center;
-   justify-content: center;
-   padding: 40px;
-   gap: 40px;
-   min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+  gap: 40px;
+  min-height: 100vh;
 }
 
 .logo {
@@ -15,7 +15,7 @@ section {
 .logo h1 {
   color: pink;
   font-size: 28px;
-   animation: slideFromTop 0.8s ease-out forwards;
+  animation: slideFromTop 0.8s ease-out forwards;
   animation-delay: 0.2s;
   opacity: 0;
 }
@@ -24,13 +24,13 @@ section {
   background: #1c1c1e;
   padding: 40px 30px;
   border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(255, 192, 203, 0.15); /* pink glow */
+  box-shadow: 0 8px 24px rgba(255, 192, 203, 0.15); 
   max-width: 440px;
   width: 100%;
   margin: auto;
   font-family: 'Segoe UI', sans-serif;
   color: #fff;
-    animation: slideFromBottom 0.8s ease-out forwards;
+  animation: slideFromBottom 0.8s ease-out forwards;
   animation-delay: 0.4s;
   opacity: 0;
 }
